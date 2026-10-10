@@ -2,6 +2,15 @@
 
 All notable changes to this module are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 1.0.0 - 2026-10-11
+
+The first stable, public release of the functionality in 0.1.0. There are no source, configuration, test, documentation or dependency changes; this changelog entry is the only difference.
+
+### Compatibility
+
+- Unchanged from 0.1.0: requires PHP 8.3 or later and Silverstripe CMS 6, with `silverstripe/framework` 6.0.4 or later.
+- Tested on PHP 8.5 with Silverstripe CMS 6.2, using the code released as 0.1.0. The lower minimums, including PHP 8.3 and 8.4 and Silverstripe CMS 6.0 and 6.1, come from a review of the upstream source and have not been run; see [docs/compatibility.md](docs/compatibility.md).
+
 ## 0.1.0 - 2026-10-11
 
 The first release.
