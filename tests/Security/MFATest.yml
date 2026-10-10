@@ -1,0 +1,46 @@
+SilverStripe\Security\Group:
+  administrators:
+    Title: Administrators
+    Code: administrators
+  editors:
+    Title: Content editors
+    Code: content-editors
+
+SilverStripe\Security\Permission:
+  admin:
+    Code: ADMIN
+    Group: =>SilverStripe\Security\Group.administrators
+  editor:
+    Code: CMS_ACCESS_CMSMain
+    Group: =>SilverStripe\Security\Group.editors
+
+SilverStripe\Security\Member:
+  admin:
+    FirstName: Avery
+    Surname: Admin
+    Email: avery.admin@example.com
+    Password: Correct-Horse-Battery-2026
+    Groups: =>SilverStripe\Security\Group.administrators
+  otheradmin:
+    FirstName: Blair
+    Surname: Admin
+    Email: blair.admin@example.com
+    Password: Correct-Horse-Battery-2026
+    Groups: =>SilverStripe\Security\Group.administrators
+  editor:
+    FirstName: Casey
+    Surname: Editor
+    Email: casey.editor@example.com
+    Password: Correct-Horse-Battery-2026
+    Groups: =>SilverStripe\Security\Group.editors
+  othereditor:
+    FirstName: Drew
+    Surname: Editor
+    Email: drew.editor@example.com
+    Password: Correct-Horse-Battery-2026
+    Groups: =>SilverStripe\Security\Group.editors
+  public:
+    FirstName: Emery
+    Surname: Public
+    Email: emery.public@example.com
+    Password: Correct-Horse-Battery-2026

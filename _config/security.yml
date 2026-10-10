@@ -1,0 +1,13 @@
+---
+Name: mfaguard-security
+After:
+  - '#coresecurity'
+  - '#fiobundle-foundation-security'
+---
+# The remember-login cookie starts a session without the password or the MFA
+# step (silverstripe-mfa#384), so "Keep me signed in" is switched off for the
+# whole site. Ordered after fromholdio/bundle-foundation's
+# security fragment, which switches it on, for sites that install it; the
+# After entry has no effect where that fragment is absent.
+SilverStripe\Security\Security:
+  autologin_enabled: false

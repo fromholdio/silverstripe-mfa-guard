@@ -1,0 +1,38 @@
+{
+    "name": "fromholdio/silverstripe-mfa-guard",
+    "description": "Verified MFA sessions, bound password-reset verification and recovery tooling for Silverstripe CMS",
+    "type": "silverstripe-vendormodule",
+    "homepage": "https://github.com/fromholdio/silverstripe-mfa-guard",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Fromhold.io",
+            "homepage": "https://fromhold.io"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/fromholdio/silverstripe-mfa-guard/issues"
+    },
+    "require": {
+        "php": "^8.3",
+        "silverstripe/framework": "^6.0.4",
+        "silverstripe/mfa": "^6.0",
+        "silverstripe/totp-authenticator": "^6.0",
+        "silverstripe/session-manager": "^3.0",
+        "silverstripe/siteconfig": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "silverstripe/cms": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fromholdio\\MFAGuard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fromholdio\\MFAGuard\\Tests\\": "tests/"
+        }
+    }
+}

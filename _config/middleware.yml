@@ -1,0 +1,17 @@
+---
+Name: mfaguard-middleware
+After:
+  - '#coresecurity'
+Before:
+  - '#versionedrequestprocessors'
+---
+# The session guard. After #coresecurity, so the framework's
+# AuthenticationMiddleware runs before it and the current member is known.
+# Before #versionedrequestprocessors, so it runs outside the versioned
+# middleware, which therefore sees a logged-out member as anonymous.
+# MFASessionGuardMiddlewareTest pins the resulting order.
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\Director:
+    properties:
+      Middlewares:
+        MFASessionGuardMiddleware: '%$Fromholdio\MFAGuard\Middleware\MFASessionGuardMiddleware'

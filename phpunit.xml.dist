@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The module's own suite, run from the root of a Silverstripe CMS project
+    that has this module installed:
+
+        vendor/bin/phpunit -c vendor/fromholdio/silverstripe-mfa-guard/phpunit.xml.dist
+
+    tests/bootstrap.php registers the test namespace with the project's
+    Composer autoloader, because a dependency's autoload-dev is never loaded
+    by the project that requires it. See docs/testing.md.
+-->
+<phpunit bootstrap="tests/bootstrap.php" colors="true" cacheResult="false">
+    <testsuites>
+        <testsuite name="mfa-guard">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

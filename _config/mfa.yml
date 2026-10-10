@@ -1,0 +1,49 @@
+---
+Name: mfaguard
+After:
+  - '#mfa-authenticator'
+  - '#mfa-siteconfig'
+  - '#mfa-memberextension'
+  - '#totpauthenticatorconfig'
+---
+# Mandatory MFA for every member with CMS access, with the guard, the bound
+# password-reset verification and session ending on account reset. See
+# README.md and docs/configuration.md. The session guard is registered in
+# middleware.yml and "Keep me signed in" is switched off in security.yml.
+
+# The requirement comes from code and config, not the SiteConfig toggle, and
+# has no grace period. MFASessionGuardMiddleware refuses to run unless this
+# replacement is in place.
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\MFA\Service\EnforcementManager:
+    class: Fromholdio\MFAGuard\Services\ConfiguredEnforcementManager
+  # One password check per submit, and the session marker the guard reads.
+  SilverStripe\MFA\Authenticator\LoginHandler:
+    class: Fromholdio\MFAGuard\Authenticators\MFALoginHandler
+  # A forgotten-password reset asks an enrolled member for one code, bound to
+  # that member and that reset, and ends with the same session marker.
+  SilverStripe\MFA\Authenticator\ChangePasswordHandler:
+    class: Fromholdio\MFAGuard\Authenticators\MFAChangePasswordHandler
+  # The name authenticator apps show comes from FIO_MFA_ISSUER_NAME, chosen
+  # before the SiteConfig title can reach otphp (see the class docblock).
+  SilverStripe\TOTP\RegisterHandler:
+    class: Fromholdio\MFAGuard\Authenticators\TOTPRegisterHandler
+
+Fromholdio\MFAGuard\Services\ConfiguredEnforcementManager:
+  is_mfa_required: true
+
+# An expired CMS session goes back through the full login and MFA instead of
+# the password-only re-login popup.
+SilverStripe\Security\CMSSecurity:
+  reauth_enabled: false
+
+# Hide the MFA module's now-meaningless settings under Settings > Access.
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    mfaGuardSiteConfigExtension: Fromholdio\MFAGuard\Extensions\SiteConfigMFAExtension
+
+# Completing an account reset also ends every session the member had open,
+# after the MFA module's own extension has removed their MFA methods.
+SilverStripe\MFA\Extension\AccountReset\SecurityExtension:
+  extensions:
+    mfaGuardAccountResetSessionExtension: Fromholdio\MFAGuard\Extensions\AccountResetSessionExtension
